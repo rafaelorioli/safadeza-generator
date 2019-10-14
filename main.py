@@ -4,6 +4,7 @@ import random
 import tweepy
 import sys
 import os
+from dicio import Dicio
 
 consumer_key = os.environ['consumer_key']
 consumer_secret =  os.environ['consumer_secret']
@@ -15,6 +16,8 @@ print(consumer_key)
 print(consumer_secret)
 print(access_token)
 print(access_token_secret)
+
+dicio = Dicio()
 
 def OAuth():
     try:
@@ -52,12 +55,27 @@ def main():
 
 
 def gerar_frase(palavra_escolhida, verbo_escolhido):
-    if palavra_escolhida.endswith('a'):
+    genero = verifica_genero(palavra_escolhida)
+    if genero == 'f':
         frase = verbo_escolhido + ' a ' + palavra_escolhida
     else:
         frase = verbo_escolhido + ' o ' + palavra_escolhida
     return frase
 
+
+def verifica_genero(palavra):
+    significado = dicio.search(palavra)
+    try:
+        if 'masculino' in significado.extra['Classe gramatical']:
+            return 'm'
+        elif 'feminino' in significado.extra['Classe gramatical']:
+            return 'f'
+    except:
+        if palavra.endswith('a'):
+            return 'f'
+        else:
+            return 'm'
+ 
 
 def escolher_palavra():
     with open('palavras_sem_verbos.txt') as palavras_sem_verbos:
