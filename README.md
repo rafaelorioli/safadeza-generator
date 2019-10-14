@@ -7,7 +7,7 @@ Esse projeto utiliza uma lista de verbos e uma lista de palavras para gerar atos
 
 Cada ato libidinoso gerado pelo algoritmo está sendo postado no [perfil do Bot no Twitter a cada 10 minutos](https://twitter.com/BotSafado). 
 
-## Instruçes para executar localmente
+## Instruções para executar localmente
 
 ```
 $ docker build  -t safadeza-generator .
